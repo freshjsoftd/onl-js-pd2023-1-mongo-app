@@ -1,5 +1,27 @@
 use('users');
+// $avg, $count, $min, $max, $sum, $multiply
+// Вывести 3-а документа, где zipcode больше 3000, начиная со 2. Поля только фамилия и город.
+// В порядке убывания фамилий
 db.customers.aggregate([
+	{
+		$match: { 'address.country': 'Ukraine' },
+	},
+	{
+		$group: {
+			_id: 'address.country',
+			maxAge: {
+				$max: '$age',
+			},
+		},
+	},
+	{
+		$project: {
+			 _id: 0,
+			maxAge: 1,
+		},
+	},
+]);
+/* db.customers.aggregate([
 	{
 		$match: { 'address.country': /^(u|g)/i },
 	},
@@ -19,7 +41,7 @@ db.customers.aggregate([
 			customerRole: 1
 		},
 	},
-]);
+]); */
 /* db.customers.updateMany(
 	{ 'address.country': 'Ukraine' },
 	{ $set: { roleId: ObjectId('65462d3686be465cf5fb2880') } }
