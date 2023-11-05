@@ -1,26 +1,33 @@
 use('users');
+db.customers
+	.find(
+		{ 'address.zipcode': { $gt: 3000 } },
+		{ lastName: 1, 'address.city': 1, _id: 1 }
+	)
+	.sort({ lastName: -1 })
+	.skip(2)
+	.limit(3);
 // $avg, $count, $min, $max, $sum, $multiply
-// Вывести 3-а документа, где zipcode больше 3000, начиная со 2. Поля только фамилия и город.
+// Вывести 3-а документа, где zipcode больше 3000, начиная со 3. Поля только фамилия и город.
 // В порядке убывания фамилий
-db.customers.aggregate([
+/* db.customers.aggregate([
 	{
-		$match: { 'address.country': 'Ukraine' },
-	},
-	{
-		$group: {
-			_id: 'address.country',
-			maxAge: {
-				$max: '$age',
-			},
-		},
+		$match: {
+			'address.zipcode': { $gt: 3000 }
+		}
 	},
 	{
 		$project: {
-			 _id: 0,
-			maxAge: 1,
-		},
+			_id: 0,
+			lastName: 1,
+			'address.city': 1,
+		}
 	},
-]);
+	{ $sort: { lastName: -1 } },
+	{ $skip: 2 },
+	{ $limit: 3 }
+]); */
+
 /* db.customers.aggregate([
 	{
 		$match: { 'address.country': /^(u|g)/i },

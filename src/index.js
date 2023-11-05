@@ -1,9 +1,34 @@
-const { users } = require('./constants/users-info');
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+// =============================
+const dbMongo = require('./models');
+const { players } = require('./constants/players-info');
 
-console.log(users);
+const app = express();
 
+app.use(express.json());
+app.use(cors());
 
-// Получить все документы с firstName, начинающимся на J
-// Получить имя и фамилию всех пользователей, проживающих в London
-// Получить имя и фамилию всех пользователей старше 40 или проживающих в Британии.
-// Получить фамилию и страну проживания у пользователей, знающих языки 'JS' и 'Python'
+const PORT = process.env.PORT || 5000;
+
+const createPlayers = async () => {
+  console.log('collection has been created')
+	const { Player } = dbMongo;
+	await Player.insertMany(players);
+};
+
+// createPlayers();
+
+const createRoles = async () => {
+  const {Role} = dbMongo;
+  const roles = [
+    {role: 'Admin', email: 'adm@gmail.com'},
+    {role: 'Moderator'},
+    {role: 'User'},
+  ]
+  await Role.create(roles);
+}
+
+createRoles();
+app.listen(PORT, () => console.log(`Server has been started on port ${PORT}`));
