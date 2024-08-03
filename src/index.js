@@ -24,11 +24,11 @@ const createRoles = async () => {
   const {Role} = dbMongo;
   const roles = [
     {role: 'Admin', email: 'adm@gmail.com'},
-    {role: 'Moderator'},
-    {role: 'User'},
+    {role: 'Moderator', email: 'mod@gmail.com'},
+    {role: 'User', email: 'user@gmail.com'},
   ]
   await Role.create(roles);
 }
 
-createRoles();
+// createRoles();
 app.listen(PORT, () => console.log(`Server has been started on port ${PORT}`));

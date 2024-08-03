@@ -5,8 +5,10 @@ const mongoose = require('mongoose')
 // =======================================
 const env = process.env.NODE_ENV || 'development';
 const basename = path.basename(__filename);
+const pathToConfig = path.resolve('src', 'config', 'mongoConfig')
 
-const config = require('../config/mongoConfig')[env];
+const config = require(pathToConfig)[env];
+// const config = require('../config/mongoConfig')[env];
 
 mongoose
   .connect(`mongodb://${config.host}:${config.port}/${config.dbName}`)
