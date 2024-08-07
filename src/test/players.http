@@ -1,2 +1,14 @@
 GET http://localhost:5000/api/players?page=1&result=3 HTTP/1/1
 content-type: application/json
+
+###
+
+GET http://localhost:5000/api/players/66af603c848dd2bf1215a140 HTTP/1/1
+content-type: application/json
+
+###
+
+GET http://localhost:5000/api/players/age?age=30 HTTP/1/1
+content-type: application/json
+
+###
