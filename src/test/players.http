@@ -3,16 +3,18 @@ content-type: application/json
 
 ###
 
+# Get by ID
 GET http://localhost:5000/api/players/66af603c848dd2bf1215a140 HTTP/1/1
 content-type: application/json
 
 ###
 
+# Get veterans
 GET http://localhost:5000/api/players/age?age=30 HTTP/1/1
 content-type: application/json
 
 ###
-
+# Create player
 POST http://localhost:5000/api/players
 content-type: application/json
 
@@ -30,7 +32,7 @@ content-type: application/json
 
 ###
 
-
+# Add roleId
 PATCH http://localhost:5000/api/players/roles HTTP/1/1
 content-type: application/json
 
