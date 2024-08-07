@@ -87,19 +87,45 @@ class PlayerController {
 	}
 
 	async addPlayer(req, res, next) {
-		const {body} = req 
-		console.log(body)
+		const { body } = req;
+		console.log(body);
 		try {
 			const createdPlayer = await Player.create(body);
 			console.log(createdPlayer);
 			if (createdPlayer) {
 				console.log(
-					`Created player is ${JSON.stringify(createdPlayer, null, 2)}`
+					`Created player is ${JSON.stringify(
+						createdPlayer,
+						null,
+						2
+					)}`
 				);
 				res.status(200).json(createdPlayer);
 			} else {
 				console.log('Can not create player');
 				next(createError(400, 'Can not create player'));
+			}
+		} catch (error) {
+			console.log(error.message);
+			next(error);
+		}
+	}
+
+	async patchPlayers(req, res, next) {
+		try {
+			const { body } = req;
+			console.log(body);
+			const {roleId, age} = body
+			const updatedPlayers = await Player.updateMany(
+				{age: {$gte: age}},
+				{$set: {roleId:  new ObjectId(roleId)}}
+			)
+			if (updatedPlayers.acknowledged) {
+				console.log(`${updatedPlayers.modifiedCount} players have been modified`);
+				res.status(200).json(updatedPlayers.modifiedCount);
+			} else {
+				console.log('Can not change players');
+				next(createError(400, 'Can not change players'));
 			}
 		} catch (error) {
 			console.log(error.message);

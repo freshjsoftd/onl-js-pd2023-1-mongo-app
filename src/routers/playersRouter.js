@@ -10,9 +10,12 @@ playerRouter.route('/')
 .get(paginate.paginate, playerCtrl.getAllPlayers)
 .post(playerCtrl.addPlayer)
 
-playerRouter.route('/age')
-.get(playerCtrl.getVeterans);
 
+playerRouter.route('/age')
+.get(playerCtrl.getVeterans)
+
+playerRouter.route('/roles')
+.patch(playerCtrl.patchPlayers)
 
 playerRouter.route('/:id')
 .get(playerCtrl.getPlayerById);

@@ -25,5 +25,19 @@ content-type: application/json
 				"city": "Guangzhou",
 				"zipcode": 510000
 			},
-			"brands": ["Galaxy", "DHS", "Xiom"]
+			"brands": ["Stiga", "DHS", "Butterfly"]
 		}
+
+###
+
+
+PATCH http://localhost:5000/api/players/roles HTTP/1/1
+content-type: application/json
+
+{
+  "roleId": "66b38cb9e56355735e3b6c27",
+  "age": 30
+  }
+
+
+  

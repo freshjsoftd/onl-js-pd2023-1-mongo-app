@@ -27,11 +27,12 @@ const createPlayers = async () => {
 const createRoles = async () => {
 	// const {Role} = dbMongo;
 	const roles = [
-		{ role: 'Admin', email: 'adm@gmail.com' },
-		{ role: 'Moderator', email: 'mod@gmail.com' },
-		{ role: 'User', email: 'user@gmail.com' },
+		{ role: 'Guru', email: 'guru@gmail.com' },
+		{ role: 'Profi', email: 'prof@gmail.com' },
+		{ role: 'Amator', email: 'amator@gmail.com' },
 	];
-	await Role.create(roles);
+	const createdRoles = await Role.create(roles);
+	console.log(createdRoles)
 };
 // createRoles();
 
