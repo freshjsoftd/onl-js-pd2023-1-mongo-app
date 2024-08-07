@@ -12,3 +12,18 @@ GET http://localhost:5000/api/players/age?age=30 HTTP/1/1
 content-type: application/json
 
 ###
+
+POST http://localhost:5000/api/players
+content-type: application/json
+
+{
+			"firstName": "Fan",
+			"lastName": "Zhendong",
+			"age": 27,
+			"address": {
+				"country": "China",
+				"city": "Guangzhou",
+				"zipcode": 510000
+			},
+			"brands": ["Galaxy", "DHS", "Xiom"]
+		}

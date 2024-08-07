@@ -50,7 +50,7 @@ class PlayerController {
 			if (player) {
 				console.log(`Player is: ${JSON.stringify(player, null, 2)}`);
 				res.status(200).json(player);
-			}else {
+			} else {
 				console.log('Player has not been found');
 				next(createError(404, 'Player has not been found'));
 			}
@@ -62,8 +62,8 @@ class PlayerController {
 
 	async getVeterans(req, res, next) {
 		try {
-			const {age} = req.query;
-			console.log(age)
+			const { age } = req.query;
+			console.log(age);
 			const veterans = await Player.find(
 				{ age: { $gte: age } },
 				{
@@ -71,14 +71,36 @@ class PlayerController {
 					lastName: 1,
 					age: 1,
 					_id: 0,
-				});
-				if (veterans) {
-					console.log(`Player is: ${JSON.stringify(veterans, null, 2)}`);
-					res.status(200).json(veterans);
-				}else {
-					console.log('Any players have not been found');
-					next(createError(404, 'Any players have not been found'));
 				}
+			);
+			if (veterans) {
+				console.log(`Player is: ${JSON.stringify(veterans, null, 2)}`);
+				res.status(200).json(veterans);
+			} else {
+				console.log('Any players have not been found');
+				next(createError(404, 'Any players have not been found'));
+			}
+		} catch (error) {
+			console.log(error.message);
+			next(error);
+		}
+	}
+
+	async addPlayer(req, res, next) {
+		const {body} = req 
+		console.log(body)
+		try {
+			const createdPlayer = await Player.create(body);
+			console.log(createdPlayer);
+			if (createdPlayer) {
+				console.log(
+					`Created player is ${JSON.stringify(createdPlayer, null, 2)}`
+				);
+				res.status(200).json(createdPlayer);
+			} else {
+				console.log('Can not create player');
+				next(createError(400, 'Can not create player'));
+			}
 		} catch (error) {
 			console.log(error.message);
 			next(error);

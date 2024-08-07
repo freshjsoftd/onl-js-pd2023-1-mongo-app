@@ -7,7 +7,8 @@ const { paginate } = require('../middlewares');
 const playerRouter = new Router();
 
 playerRouter.route('/')
-.get(paginate.paginate, playerCtrl.getAllPlayers);
+.get(paginate.paginate, playerCtrl.getAllPlayers)
+.post(playerCtrl.addPlayer)
 
 playerRouter.route('/age')
 .get(playerCtrl.getVeterans);
